@@ -135,7 +135,7 @@ export ftp_proxy=”http://DPTSI-563019-73c30:fb3e7@proxy.its.ac.id:8080”
 
 - Kemudian mengedit file dengan perintah ```nano /etc/dhcp/dhcpd.conf```. Ditambahkan sesuai gambar di bawah:
 
-![image](https://user-images.githubusercontent.com/48936125/100202565-0f834c80-2f34-11eb-8b9a-bb594a4f1113.png)
+![image](https://user-images.githubusercontent.com/48936125/100210125-35f9b580-2f3d-11eb-8ddf-7727d09186d2.png)
 
 - ```range 192.168.0.10 192.168.0.100;``` dan ```range 192.168.0.110 192.168.0.200;``` merupakan jawaban soal no 3 (SUBNET 1)
 - ```range 192.168.1.50 192.168.1.70;``` merupakan jawaban soal no 4 (SUBNET 3)
