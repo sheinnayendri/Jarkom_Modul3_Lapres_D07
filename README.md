@@ -190,3 +190,66 @@ Maka ketika dijalankan ```ifconfig``` dan ```cat /etc/resolv.conf``` akan terlih
 - Karena sudah sesuai, maka berarti setting DHCP sudah berhasil.
 
 ### Soal7-11
+- Pada proxy server, yaitu UML **MOJOKERTO** akan diinstall squid terlebih dahulu dengan perintah ```apt-get install squid```.
+- Kemudian mengedit file dengan perintah ```nano /etc/squid/squid.conf``` menjadi gambar berikut untuk menjawab soal no 7-11:
+
+![image](https://user-images.githubusercontent.com/48936125/100204709-c4b70400-2f36-11eb-8617-a5a7cfbd459b.png)
+
+- Untuk soal no7, perlu dilakukan pendaftaran username dan password dengan cara meng-install apache-utils terlebih dahulu dengan perintah ```apt-get install apache2-utils```.
+- Kemudian masukkan akun baru dengan ```htpasswd -c /etc/squid/passwd userta_d07``` dan masukkan password yang sesuai yaitu ```inipassw0rdta_d07```.
+- Pada file ```squid.conf``` ditambahkan perintah berikut:
+```
+auth_param basic program /usr/lib/squid/ncsa_auth /etc/squid/passwd
+auth_param basic children 5
+auth_param basic realm Proxy
+auth_param basic credentialsttl 2 hours
+auth_param basic casesensitive on
+acl USERS proxy_auth REQUIRED
+http_access allow USERS
+```
+- Sehingga saat diakses muncul autentikasi sebagai berikut:
+
+![image](https://user-images.githubusercontent.com/48936125/100205153-5292ef00-2f37-11eb-9721-26039b411a27.png)
+
+- Untuk soal no8-9, ditambahkan file baru yaitu dengan perintah ```nano /etc/squid/acl.conf``` ditambahkan perintah seperti gambar berikut:
+
+![image](https://user-images.githubusercontent.com/48936125/100205316-8b32c880-2f37-11eb-8cdc-73b11daab57a.png)
+
+- Pada baris pertama, dilakukan setting sesuai no8, yaitu pada hari Selasa-Rabu pujul 13.00-18.00, sedangkan pada baris kedua dan ketiga, dilakukan setting sesuai no9, yaitu pada hari Selasa-Kamis pukul 21.00-09.00.
+
+- Pada file ```/etc/squid/squid.conf``` juga ditambahkan baris berikut:
+```
+include /etc/squid/acl.conf
+
+http_access allow AVAILABLE_WORKING
+http_access allow AVAILABLE_WORKING_2
+http_access allow AVAILABLE_WORKING_3
+```
+
+- Kemudian untuk soal no10, ditambahkan perintah pada ```/etc/squid/squid.conf``` dengan perintah:
+```
+acl redi dstdomain google.com
+deny_info http://monta.if.its.ac.id redi
+http_reply_access deny redi
+```
+
+- Untuk soal no11, untuk mengubah default error page, kita dapat memindahkan custom error page kita ke folder ```/usr/share/squid/errors/en/```, jadi setelah kita download dengan perintah ```wget 10.151.36.202/ERR_ACCESS_DENIED```, kita copy-kan ke folder tersebut. Mengenai isi default folder tersebut dapat dipindah dahulu ke folder temporary lainnya dengan perintah ```mv /usr/share/squid/errors/en /usr/share/squid/errors/en1```, kemudian meng-copy file kita ke folder tersebut dengan perintah ```cp -r ERR_ACCESS_DENIED /usr/share/squid/errors/en/```.
+
+### Soal12
+- Perlu dilakukan setting DNS Server terlebih dahulu pada UML **MALANG**, yaitu dengan instalasi ```apt-get install bind9 -y```.
+- Kemudian ```nano /etc/bind/named.conf.local```
+- Tambahkan kode seperti gambar berikut:
+
+![image](https://user-images.githubusercontent.com/48936125/100206290-b833ab00-2f38-11eb-8af6-69603fccde70.png)
+
+- Kemudian buat folder baru: ```mkdir /etc/bind/jarkom```
+- Dan copy file db.local ke folder yang baru saja dibuat dan mengganti namanya sesuai domain yang diinginkan: ```cp /etc/bind/db.local /etc/bind/jarkom/janganlupa-ta.d07.pw```
+- Kemudian buka file ```janganlupa-ta.d07.pw``` dengan perintah: ```nano /etc/bind/jarkom/janganlupata-d07.pw```. Edit sesuai gambar di bawah:
+
+![image](https://user-images.githubusercontent.com/48936125/100206420-e1543b80-2f38-11eb-910b-9a3e2b2613bb.png)
+
+- Kemudian setelah itu melakukan restart service bind9 dengan perintah ```service bind9 restart```.
+
+- Maka saat proxy domain diubah menjadi ```janganlupa-ta.d07.pw```, proxy berarti diakses.
+
+![image](https://user-images.githubusercontent.com/48936125/100206497-fb8e1980-2f38-11eb-8e1e-fde43982d6f2.png)
