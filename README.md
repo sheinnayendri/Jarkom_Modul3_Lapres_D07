@@ -160,24 +160,32 @@ Kemudian dilakukan restart network: ```service networking restart```.
 Maka ketika dijalankan ```ifconfig``` dan ```cat /etc/resolv.conf``` akan terlihat pada setiap UML sebagai berikut:
 
 **Pada UML GRESIK (SUBNET 1)**
-![image](https://user-images.githubusercontent.com/48936125/100203579-5e7db180-2f35-11eb-92cd-e7068313fd80.png
+
+![image](https://user-images.githubusercontent.com/48936125/100203579-5e7db180-2f35-11eb-92cd-e7068313fd80.png)
 
 ![image](https://user-images.githubusercontent.com/48936125/100203570-5aea2a80-2f35-11eb-9d4e-1e83f95b57bd.png)
 
+
 **Pada UML SIDOARJO (SUBNET 1)**
+
 ![image](https://user-images.githubusercontent.com/48936125/100203594-65a4bf80-2f35-11eb-8789-07e56eb10091.png)
 
 ![image](https://user-images.githubusercontent.com/48936125/100203661-79502600-2f35-11eb-8eb6-4570c512505b.png)
 
+
 **Pada UML BANYUWANGI (SUBNET 3)**
+
 ![image](https://user-images.githubusercontent.com/48936125/100203751-94bb3100-2f35-11eb-98f8-6da985290666.png)
 
 ![image](https://user-images.githubusercontent.com/48936125/100203763-98e74e80-2f35-11eb-98d3-5c35e13bc306.png)
 
+
 **Pada UML MADIUN (SUBNET 3)**
+
 ![image](https://user-images.githubusercontent.com/48936125/100203807-a69cd400-2f35-11eb-89da-d56a2bf4377b.png)
 
 ![image](https://user-images.githubusercontent.com/48936125/100203827-aac8f180-2f35-11eb-98c6-a93b120081ca.png)
+
 
 - Karena sudah sesuai, maka berarti setting DHCP sudah berhasil.
 
