@@ -193,7 +193,7 @@ Maka ketika dijalankan ```ifconfig``` dan ```cat /etc/resolv.conf``` akan terlih
 - Pada proxy server, yaitu UML **MOJOKERTO** akan diinstall squid terlebih dahulu dengan perintah ```apt-get install squid```.
 - Kemudian mengedit file dengan perintah ```nano /etc/squid/squid.conf``` menjadi gambar berikut untuk menjawab soal no 7-11:
 
-![image](https://user-images.githubusercontent.com/48936125/100204709-c4b70400-2f36-11eb-8617-a5a7cfbd459b.png)
+![image](https://user-images.githubusercontent.com/48936125/100430433-5e161f80-30c9-11eb-8873-648ef667a80b.png)
 
 - Untuk soal no7, perlu dilakukan pendaftaran username dan password dengan cara meng-install apache-utils terlebih dahulu dengan perintah ```apt-get install apache2-utils```.
 - Kemudian masukkan akun baru dengan ```htpasswd -c /etc/squid/passwd userta_d07``` dan masukkan password yang sesuai yaitu ```inipassw0rdta_d07```.
@@ -211,19 +211,21 @@ http_access allow USERS
 
 ![image](https://user-images.githubusercontent.com/48936125/100205153-5292ef00-2f37-11eb-9721-26039b411a27.png)
 
-- Untuk soal no8-9, ditambahkan file baru yaitu dengan perintah ```nano /etc/squid/acl.conf``` ditambahkan perintah seperti gambar berikut:
+- Untuk soal no8-9, ditambahkan file baru yaitu dengan perintah ```nano /etc/squid/acl.conf``` ditambahkan perintah seperti gambar berikut (waktu kebalikannya), karena menggunakan perintah **deny**:
 
-![image](https://user-images.githubusercontent.com/48936125/100205316-8b32c880-2f37-11eb-8cdc-73b11daab57a.png)
+![image](https://user-images.githubusercontent.com/48936125/100430605-9a498000-30c9-11eb-8522-56795daaf16c.png)
 
-- Pada baris pertama, dilakukan setting sesuai no8, yaitu pada hari Selasa-Rabu pujul 13.00-18.00, sedangkan pada baris kedua dan ketiga, dilakukan setting sesuai no9, yaitu pada hari Selasa-Kamis pukul 21.00-09.00.
+- Pada baris pertama, dilakukan setting sesuai no8, yaitu pada hari Selasa-Rabu pujul 13.00-18.00, sedangkan pada baris kedua dan ketiga, dilakukan setting sesuai no9, yaitu pada hari Selasa-Kamis pukul 21.00-09.00. Di sini kami menggunakan perintah kebalikannya yaitu men-deny saat waktu yang tidak dapat diakses, sehingga menjadi seperti ini:
 
 - Pada file ```/etc/squid/squid.conf``` juga ditambahkan baris berikut:
 ```
 include /etc/squid/acl.conf
 
-http_access allow AVAILABLE_WORKING
-http_access allow AVAILABLE_WORKING_2
-http_access allow AVAILABLE_WORKING_3
+http_access deny AVAILABLE_WORKING
+http_access deny AVAILABLE_WORKING_2
+http_access deny AVAILABLE_WORKING_3
+http_access deny AVAILABLE_WORKING_4
+http_access deny AVAILABLE_WORKING_5
 ```
 
 - Kemudian untuk soal no10, ditambahkan perintah pada ```/etc/squid/squid.conf``` dengan perintah:
@@ -233,7 +235,10 @@ deny_info http://monta.if.its.ac.id redi
 http_reply_access deny redi
 ```
 
-- Untuk soal no11, untuk mengubah default error page, kita dapat memindahkan custom error page kita ke folder ```/usr/share/squid/errors/en/```, jadi setelah kita download dengan perintah ```wget 10.151.36.202/ERR_ACCESS_DENIED```, kita copy-kan ke folder tersebut. Mengenai isi default folder tersebut dapat dipindah dahulu ke folder temporary lainnya dengan perintah ```mv /usr/share/squid/errors/en /usr/share/squid/errors/en1```, kemudian meng-copy file kita ke folder tersebut dengan perintah ```cp -r ERR_ACCESS_DENIED /usr/share/squid/errors/en/```.
+- Untuk soal no11, untuk mengubah default error page, kita dapat memindahkan custom error page kita ke folder ```/usr/share/squid/errors/en/```, jadi setelah kita download dengan perintah ```wget 10.151.36.202/ERR_ACCESS_DENIED```, kita copy-kan ke folder tersebut. Mengenai isi default folder tersebut dapat dipindah dahulu ke folder temporary lainnya dengan perintah ```mv /usr/share/squid/errors/en /usr/share/squid/errors/en1```, kemudian meng-copy file kita ke folder tersebut dengan perintah ```cp -r ERR_ACCESS_DENIED /usr/share/squid/errors/en/```. Jika mengakses di saat jam yang seharusnya di-deny akan muncul seperti gambar berikut (misal diakses pada hari Senin pukul 07:00):
+
+![image](https://user-images.githubusercontent.com/48936125/100430739-c36a1080-30c9-11eb-80c3-071313dac261.png)
+
 
 ### Soal12
 - Perlu dilakukan setting DNS Server terlebih dahulu pada UML **MALANG**, yaitu dengan instalasi ```apt-get install bind9 -y```.
